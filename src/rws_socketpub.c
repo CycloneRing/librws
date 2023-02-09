@@ -96,6 +96,18 @@ rws_bool rws_socket_send_text(rws_socket socket, const char * text) {
 	return r;
 }
 
+rws_bool rws_socket_send_binary(rws_socket socket, void* dataPtr, size_t dataSize)
+{
+	_rws_socket * s = (_rws_socket *)socket;
+	rws_bool r = rws_false;
+	if (s) {
+		rws_mutex_lock(s->send_mutex);
+		r = rws_socket_send_bin_priv(s, dataPtr, dataSize);
+		rws_mutex_unlock(s->send_mutex);
+	}
+	return r;
+}
+
 #if !defined(RWS_OS_WINDOWS)
 void rws_socket_handle_sigpipe(int signal_number) {
 	printf("\nlibrws handle sigpipe %i", signal_number);
