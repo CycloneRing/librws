@@ -645,6 +645,23 @@ rws_bool rws_socket_send_text_priv(rws_socket s, const char * text) {
 	return rws_true;
 }
 
+rws_bool rws_socket_send_bin_priv(_rws_socket * s, void* dataPtr, size_t dataSize) 
+{
+	_rws_frame * frame = NULL;
+
+	if (dataSize <= 0) {
+		return rws_false;
+	}
+
+	frame = rws_frame_create();
+	frame->is_masked = rws_true;
+	frame->opcode = rws_opcode_binary_frame;
+	rws_frame_fill_with_send_data(frame, dataPtr, dataSize);
+	rws_socket_append_send_frames(s, frame);
+
+	return rws_true;
+}
+
 void rws_socket_delete_all_frames_in_list(_rws_list * list_with_frames) {
 	_rws_frame * frame = NULL;
 	_rws_node * cur = list_with_frames;
