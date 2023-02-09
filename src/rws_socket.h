@@ -143,6 +143,8 @@ void rws_socket_append_send_frames(rws_socket s, _rws_frame * frame);
 
 rws_bool rws_socket_send_text_priv(rws_socket s, const char * text);
 
+rws_bool rws_socket_send_bin_priv(_rws_socket* s, void* dataPtr, size_t dataSize);
+
 void rws_socket_inform_recvd_frames(rws_socket s);
 
 void rws_socket_set_option(rws_socket_t s, int option, int value);
