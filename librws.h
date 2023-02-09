@@ -307,6 +307,16 @@ RWS_API(rws_bool) rws_socket_is_connected(rws_socket socket);
  */
 RWS_API(rws_bool) rws_socket_send_text(rws_socket socket, const char * text);
 
+/**
+ @brief Send binary data to connect socket.
+ @detailed Thread safe method.
+ @param socket Socket object.
+ @param dataPtr data buffer pointer for sending.
+ @param dataSize data buffer size.
+ @return rws_true - socket and text exists and placed to send queue, otherwice rws_false.
+ */
+RWS_API(rws_bool) rws_socket_send_binary(rws_socket socket, void* dataPtr, size_t dataSize);
+
 
 /**
  @brief Set socket user defined object pointer for identificating socket object.
